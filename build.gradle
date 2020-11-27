@@ -57,6 +57,8 @@ minecraft {
     }
 
     clientOnly = true
+
+    accessWidener "src/main/resources/textile.accesswidener"
 }
 
 processResources {

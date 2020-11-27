@@ -1,30 +1,30 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
+  "id": "textile",
   "version": "${version}",
 
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "Textile API",
+  "description": "The general API built on Textile for infdev",
   "authors": [
-    "Me!"
+    "TextileMC"
   ],
   "contact": {
-    "issues": "https://github.com/TextileMC/Textile-Example-Mod/issues",
-    "sources": "https://github.com/TextileMC/Textile-Example-Mod"
+    "issues": "https://github.com/TextileMC/textile-api/issues",
+    "sources": "https://github.com/TextileMC/textile-api"
   },
 
   "license": "CC0-1.0",
-  "icon": "assets/modid/icon.png",
+  "icon": "assets/textile/icon.png",
 
   "environment": "*",
   "entrypoints": {
-    "main": [
-      "net.textilemc.examplemod.ExampleMod"
-    ]
+    "main": []
   },
   "mixins": [
-    "modid.mixins.json"
+    "textile.gui.mixins.json"
   ],
+
+  "accessWidener": "textile.accesswidener",
 
   "depends": {
     "fabricloader": "*",

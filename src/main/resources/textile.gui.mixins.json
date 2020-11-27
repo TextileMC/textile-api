@@ -1,11 +1,12 @@
 {
   "required": true,
-  "package": "net.textilemc.examplemod.mixin",
+  "package": "net.textilemc.textile.gui.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "TitleScreenMixin"
   ],
   "client": [
-    "ExampleMixin"
+    "ButtonMixin"
   ],
   "injectors": {
     "defaultRequire": 1
