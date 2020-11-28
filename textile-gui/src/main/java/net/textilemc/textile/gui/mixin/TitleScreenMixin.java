@@ -15,6 +15,6 @@ public abstract class TitleScreenMixin extends Screen {
     private void addFabricInfo(CallbackInfo ci) {
 
         String text = "Fabric Loader (TextileMC): " + FabricLoader.getInstance().getAllMods().size() + " mods";
-        method_595(this.field_917, text, 2, 2, 0x808080);
+        drawText(this.textureManager, text, 2, 2, 0x808080);
     }
 }

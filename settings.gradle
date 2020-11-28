@@ -12,3 +12,8 @@ pluginManagement {
         }
     }
 }
+
+rootProject.name = "textile-api"
+
+include 'textile-api-base'
+include 'textile-gui'

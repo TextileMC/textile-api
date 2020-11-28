@@ -15,17 +15,6 @@
 
   "license": "CC0-1.0",
   "icon": "assets/textile/icon.png",
-
-  "environment": "*",
-  "entrypoints": {
-    "main": []
-  },
-  "mixins": [
-    "textile.gui.mixins.json"
-  ],
-
-  "accessWidener": "textile.accesswidener",
-
   "depends": {
     "fabricloader": "*",
     "minecraft": "20100618"

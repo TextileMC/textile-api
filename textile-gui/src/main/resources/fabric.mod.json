@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "id": "textile-gui",
+  "name": "Textile GUI API",
+  "version": "${version}",
+  "license": "CC0-1.0",
+  "icon": "assets/textile-gui/icon.png",
+  "contact": {
+    "issues": "https://github.com/TextileMC/textile-api/issues",
+    "sources": "https://github.com/TextileMC/textile-api"
+  },
+  "authors": [
+    "TextileMC"
+  ],
+  "depends": {
+    "textile-api-base": "*"
+  },
+  "mixins": [
+    "textile-gui.mixins.json"
+  ],
+  "description": "Adds more functionality for GUI"
+}

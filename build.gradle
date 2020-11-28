@@ -1,54 +1,183 @@
+import net.fabricmc.loom.task.RemapJarTask
+
 plugins {
-    id 'textile-loom' version '0.5.1+build12'
+    id 'java'
+    id 'eclipse'
+    id 'idea'
+    id 'maven-publish'
+    id 'textile-loom' version '0.5.1+build12' apply false
 }
 
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
+class Globals {
+    static def baseVersion = "0.2.0"
+    static def mcVersion = "inf-20100618"
+    static def yarnVersion = "+build20d333"
+}
+version = Globals.baseVersion //+ "+" + (ENV.BUILD_NUMBER ? ("build." + ENV.BUILD_NUMBER) : "local") + "-" + getBranch()
 
-archivesBaseName = project.archives_base_name
-version = project.mod_version
-group = project.maven_group
+logger.lifecycle("Building Textile: " + version)
+
+allprojects {
+    apply plugin: 'textile-loom'
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    group = "net.textilemc.textile"
+
+    loom {
+        shareCaches = true
+    }
+
+    repositories {
+        maven { url 'https://maven.concern.i.ng/' }
+    }
+
+    dependencies {
+        minecraft "com.mojang:minecraft:$Globals.mcVersion"
+        mappings "net.textilemc:yarrn:${Globals.mcVersion}${Globals.yarnVersion}:v2"
+        modImplementation "net.fabricmc:fabric-loader:0.10.0+build.208"
+    }
+
+    configurations {
+        dev
+    }
+
+    jar {
+        classifier = "dev"
+    }
+
+    afterEvaluate {
+        remapJar {
+            input = file("${project.buildDir}/libs/$archivesBaseName-${version}-dev.jar")
+            archiveName = "${archivesBaseName}-${version}.jar"
+        }
+
+        artifacts {
+            dev file: file("${project.buildDir}/libs/$archivesBaseName-${version}-dev.jar"), type: "jar", builtBy: jar
+        }
+
+        processResources {
+            inputs.property "version", project.version
+
+            from(sourceSets.main.resources.srcDirs) {
+                include "fabric.mod.json"
+                expand "version": project.version
+            }
+
+            from(sourceSets.main.resources.srcDirs) {
+                exclude "fabric.mod.json"
+            }
+        }
+    }
+
+    task sourcesJar(type: Jar, dependsOn: classes) {
+        classifier = 'sources'
+        from sourceSets.main.allSource
+    }
+
+    minecraft {
+        intermediaryUrl = {
+            return "https://maven.concern.i.ng/net/textilemc/intermediary/" + it + "/intermediary-" + it + "-v2.jar"
+        }
+
+        clientOnly = true
+    }
+}
+
+javadoc {
+    options.memberLevel = "PACKAGE"
+    allprojects.each {
+        source(it.sourceSets.main.allJava.srcDirs)
+    }
+    classpath = sourceSets.main.compileClasspath
+}
+
+subprojects {
+    task remapMavenJar(type: Copy, dependsOn: remapJar) {
+        afterEvaluate {
+            from("${project.buildDir}/libs/$archivesBaseName-${version}.jar")
+            into("${project.buildDir}/libs/")
+            rename {String fn -> "$archivesBaseName-${version}-maven.jar"}
+        }
+    }
+
+    publishing {
+        publications {
+            create("${archivesBaseName}_mavenJava", MavenPublication) {
+                afterEvaluate {
+                    artifact(file("${project.buildDir}/libs/$archivesBaseName-${version}-maven.jar")) {
+                        builtBy remapMavenJar
+                    }
+                    artifact(sourcesJar) {
+                        builtBy remapSourcesJar
+                    }
+                }
+            }
+        }
+    }
+
+    javadoc.enabled = false
+}
+
+task remapMavenJar(type: RemapJarTask, dependsOn: jar) {
+    afterEvaluate {
+        input = file("${project.buildDir}/libs/${archivesBaseName}-${version}-dev.jar")
+        archiveName = "${archivesBaseName}-${version}-maven.jar"
+        addNestedDependencies = false
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifact(file("${project.buildDir}/libs/$archivesBaseName-${version}-maven.jar")) {
+                builtBy remapMavenJar
+            }
+            artifact(sourcesJar) {
+                builtBy remapSourcesJar
+            }
+            pom.withXml {
+                def depsNode = asNode().appendNode("dependencies")
+                subprojects.each {
+                    def depNode = depsNode.appendNode("dependency")
+                    depNode.appendNode("groupId", it.group)
+                    depNode.appendNode("artifactId", it.name)
+                    depNode.appendNode("version", it.version)
+                    depNode.appendNode("scope", "compile")
+                }
+            }
+        }
+    }
+}
+
+task licenseFormatAll
+subprojects {p -> licenseFormatAll.dependsOn("${p.path}:licenseFormat")}
+subprojects.each {remapJar.dependsOn("${it.path}:remapJar")}
 
 repositories {
-    maven {
-        name = "Jitpack"
-        url "https://jitpack.io/"
+    flatDir {
+        dirs 'jars'
     }
-    maven {
-        name = "Concerning"
-        url "https://maven.concern.i.ng/"
-    }
+    mavenCentral()
+    maven { url 'https://maven.concern.i.ng/' }
 }
 
 dependencies {
-    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    afterEvaluate {
+        subprojects.each {
+            compile project(path: ":${it.name}", configuration: "dev")
+            include project("${it.name}:")
+        }
+    }
 
-    mappings "net.textilemc:yarrn:inf-20100618+build20d332:v2"
-
-    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
-
-    // Some dependencies aren't gotten by the loader, so we add them ourselves
-    implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.8.1'
-    implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.8.1'
-    implementation 'com.google.guava:guava:28.0-jre'
-    implementation group: 'com.google.code.gson', name: 'gson', version: '2.8.6'
-    implementation 'org.ow2.asm:asm:8.0'
-    implementation 'org.ow2.asm:asm-analysis:8.0'
-    implementation 'org.ow2.asm:asm-commons:8.0'
-    implementation 'org.ow2.asm:asm-tree:8.0'
-    implementation 'org.ow2.asm:asm-util:8.0'
-    annotationProcessor group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.8.1'
-    annotationProcessor group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.8.1'
+    minecraft "com.mojang:minecraft:$Globals.mcVersion"
+//	mappings "net.fabricmc:yarn:${Globals.mcVersion}${Globals.yarnVersion}:v2"
+    modImplementation "net.fabricmc:fabric-loader:0.10.0+build.208"
 }
 
-configurations.all {
-    resolutionStrategy {
-        dependencySubstitution {
-            substitute module('org.lwjgl.lwjgl:lwjgl_util:2.9.1-nightly-20130708-debug3') with module('org.lwjgl.lwjgl:lwjgl_util:2.9.4-nightly-20150209') 
-            substitute module('org.lwjgl.lwjgl:lwjgl:2.9.1-nightly-20130708-debug3') with module('org.lwjgl.lwjgl:lwjgl:2.9.4-nightly-20150209')
-        }
-        force 'org.lwjgl.lwjgl:lwjgl-platform:2.9.4-nightly-20150209'
-    }
+loom {
+    shareCaches = true
 }
 
 minecraft {
@@ -57,34 +186,13 @@ minecraft {
     }
 
     clientOnly = true
-
-    accessWidener "src/main/resources/textile.accesswidener"
 }
 
-processResources {
-    inputs.property "version", project.version
-
-    from(sourceSets.main.resources.srcDirs) {
-        include "fabric.mod.json"
-        expand "version": project.version
-    }
-
-    from(sourceSets.main.resources.srcDirs) {
-        exclude "fabric.mod.json"
+task copyIdeaFiles(type: Copy) {
+    if (file(".idea/").exists()) {
+        from "idea-docs/"
+        into ".idea/"
     }
 }
 
-// ensure that the encoding is set to UTF-8, no matter what the system default is
-// this fixes some edge cases with special characters not displaying correctly
-// see http://yodaconditions.net/blog/fix-for-java-file-encoding-problems-with-gradle.html
-tasks.withType(JavaCompile) {
-    options.encoding = "UTF-8"
-}
-
-// Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
-// if it is present.
-// If you remove this task, sources will not be generated.
-task sourcesJar(type: Jar, dependsOn: classes) {
-    classifier = "sources"
-    from sourceSets.main.allSource
-}
+copyIdeaFiles

@@ -11,10 +11,10 @@ import net.minecraft.client.gui.DrawableHelper;
 
 @Mixin(Button.class)
 public abstract class ButtonMixin extends DrawableHelper {
-    @Shadow private int field_939;
+    @Shadow private int height;
 
     @Inject(method = "<init>(IIIIILjava/lang/String;)V", at = @At("RETURN"))
     private void onInit(int i, int i2, int i3, int width, int height, String text, CallbackInfo ci) {
-        this.field_939 = height;
+        this.height = height;
     }
 }
