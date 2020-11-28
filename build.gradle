@@ -37,6 +37,19 @@ allprojects {
         minecraft "com.mojang:minecraft:$Globals.mcVersion"
         mappings "net.textilemc:yarrn:${Globals.mcVersion}${Globals.yarnVersion}:v2"
         modImplementation "net.fabricmc:fabric-loader:0.10.0+build.208"
+
+        // Some dependencies aren't gotten by the loader, so we add them ourselves
+        implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.8.1'
+        implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.8.1'
+        implementation 'com.google.guava:guava:28.0-jre'
+        implementation group: 'com.google.code.gson', name: 'gson', version: '2.8.6'
+        implementation 'org.ow2.asm:asm:8.0'
+        implementation 'org.ow2.asm:asm-analysis:8.0'
+        implementation 'org.ow2.asm:asm-commons:8.0'
+        implementation 'org.ow2.asm:asm-tree:8.0'
+        implementation 'org.ow2.asm:asm-util:8.0'
+        annotationProcessor group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.8.1'
+        annotationProcessor group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.8.1'
     }
 
     configurations {
@@ -174,6 +187,19 @@ dependencies {
     minecraft "com.mojang:minecraft:$Globals.mcVersion"
 //	mappings "net.fabricmc:yarn:${Globals.mcVersion}${Globals.yarnVersion}:v2"
     modImplementation "net.fabricmc:fabric-loader:0.10.0+build.208"
+
+    // Some dependencies aren't gotten by the loader, so we add them ourselves
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.8.1'
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.8.1'
+    implementation 'com.google.guava:guava:28.0-jre'
+    implementation group: 'com.google.code.gson', name: 'gson', version: '2.8.6'
+    implementation 'org.ow2.asm:asm:8.0'
+    implementation 'org.ow2.asm:asm-analysis:8.0'
+    implementation 'org.ow2.asm:asm-commons:8.0'
+    implementation 'org.ow2.asm:asm-tree:8.0'
+    implementation 'org.ow2.asm:asm-util:8.0'
+    annotationProcessor group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.8.1'
+    annotationProcessor group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.8.1'
 }
 
 loom {
