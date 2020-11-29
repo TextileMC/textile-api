@@ -118,6 +118,7 @@ public enum TriState {
 
 	/**
 	 * Performs a {@code AND} operation on another tri-state.
+	 *
 	 * @param other the tri-state that must operated with
 	 * @return the result of the operation
 	 */
@@ -125,6 +126,7 @@ public enum TriState {
 
 	/**
 	 * Performs a {@code OR} operation on another tri-state.
+	 *
 	 * @param other the tri-state that must operated with
 	 * @return the result of the operation
 	 */
@@ -132,6 +134,7 @@ public enum TriState {
 
 	/**
 	 * Negates the value of the tri-state.
+	 *
 	 * @return the negated value
 	 */
 	public abstract TriState negate();
@@ -140,7 +143,7 @@ public enum TriState {
 	 * Flat maps the boolean value of this tri-state if it is {@link TriState#TRUE} or {@link TriState#FALSE}.
 	 *
 	 * @param mapper the mapper to use
-	 * @param <T> the type of object being supplier by the mapper
+	 * @param <T>    the type of object being supplier by the mapper
 	 * @return a stream containing the flattened values; {@link Stream#empty()} if the tri-state is {@link TriState#UNDEFINED} or the value provided by the mapper is {@code null}.
 	 */
 	public <T> Stream<T> flatMap(BooleanFunction<? extends Stream<T>> mapper) {
@@ -195,7 +198,7 @@ public enum TriState {
 	 * Maps the boolean value of this tri-state if it is {@link TriState#TRUE} or {@link TriState#FALSE}.
 	 *
 	 * @param mapper the mapper to use
-	 * @param <T> the type of object being supplier by the mapper
+	 * @param <T>    the type of object being supplier by the mapper
 	 * @return an optional containing the mapped value; {@link Optional#empty()} if the tri-state is {@link TriState#UNDEFINED} or the value provided by the mapper is {@code null}.
 	 */
 	public <T> Optional<T> map(BooleanFunction<? extends T> mapper) {
@@ -212,7 +215,7 @@ public enum TriState {
 	 * Gets the value of this tri-state, or throws an exception if this tri-state's value is {@link TriState#UNDEFINED}.
 	 *
 	 * @param exceptionSupplier the supplying function that produces an exception to be thrown
-	 * @param <X> Type of the exception to be thrown
+	 * @param <X>               Type of the exception to be thrown
 	 * @return the value
 	 * @throws X if the value is {@link TriState#UNDEFINED}
 	 */

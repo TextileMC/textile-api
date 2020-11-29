@@ -2,7 +2,6 @@
   "schemaVersion": 1,
   "id": "textile",
   "version": "${version}",
-
   "name": "Textile API",
   "description": "The general API built on Textile for infdev",
   "authors": [
@@ -12,10 +11,8 @@
     "issues": "https://github.com/TextileMC/textile-api/issues",
     "sources": "https://github.com/TextileMC/textile-api"
   },
-
   "license": "CC0-1.0",
   "icon": "assets/textile/icon.png",
-
   "environment": "*",
   "entrypoints": {
     "main": []
@@ -23,9 +20,7 @@
   "mixins": [
     "textile.gui.mixins.json"
   ],
-
   "accessWidener": "textile.accesswidener",
-
   "depends": {
     "fabricloader": "*",
     "minecraft": "20100618"

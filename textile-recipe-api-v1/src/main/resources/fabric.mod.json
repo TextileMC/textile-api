@@ -2,7 +2,6 @@
   "schemaVersion": 1,
   "id": "textile-recipe-api-v1",
   "version": "${version}",
-
   "name": "Textile Recipe API (v1)",
   "description": "Hooks for infdev recipes",
   "authors": [
@@ -12,16 +11,12 @@
     "issues": "https://github.com/TextileMC/textile-api/issues",
     "sources": "https://github.com/TextileMC/textile-api"
   },
-
   "license": "CC0-1.0",
   "icon": "assets/textile-recipe-api-v1/icon.png",
-
   "environment": "*",
-
   "mixins": [
     "textile-recipe-api-v1.mixins.json"
   ],
-
   "depends": {
     "fabricloader": "*",
     "minecraft": "20100618"

@@ -34,5 +34,6 @@ public final class NbtType {
 	public static final int COMPOUND = 10;
 	public static final int INT_ARRAY = 11;
 
-	private NbtType() { }
+	private NbtType() {
+	}
 }

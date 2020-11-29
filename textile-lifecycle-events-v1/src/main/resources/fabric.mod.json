@@ -2,7 +2,6 @@
   "schemaVersion": 1,
   "id": "textile-lifecycle-events-v1",
   "version": "${version}",
-
   "name": "Textile Lifecycle Events (v1)",
   "description": "Hooks for infdev lifecycle",
   "authors": [
@@ -12,16 +11,12 @@
     "issues": "https://github.com/TextileMC/textile-api/issues",
     "sources": "https://github.com/TextileMC/textile-api"
   },
-
   "license": "CC0-1.0",
   "icon": "assets/textile-lifecycle-events-v1/icon.png",
-
   "environment": "*",
-
   "mixins": [
     "textile-lifecycle-events-v1.mixins.json"
   ],
-
   "depends": {
     "fabricloader": "*",
     "minecraft": "20100618"
