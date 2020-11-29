@@ -13,4 +13,5 @@ pluginManagement {
     }
 }
 
-include(":textile-api-gui")
+include("textile-api-gui")
+include("textile-recipe-api-v1")
