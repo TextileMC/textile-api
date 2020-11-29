@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "package": "net.textilemc.textile.mixin.lifecycle",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "MinecraftClientMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

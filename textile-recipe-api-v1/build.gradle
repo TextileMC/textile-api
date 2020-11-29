@@ -1,0 +1,6 @@
+archivesBaseName = 'textile-recipe-api-v1'
+version = '1.0.0'
+
+dependencies {
+	implementation project(':textile-api-base')
+}

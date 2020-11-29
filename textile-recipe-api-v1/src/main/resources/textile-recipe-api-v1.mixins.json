@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "package": "net.textilemc.textile.mixin.recipe",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "RecipeDispatcherMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

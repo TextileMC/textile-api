@@ -1,16 +1,19 @@
 pluginManagement {
-    repositories {
-        jcenter()
-        maven {
-            name = "concern"
-            url = "https://maven.concern.i.ng/"
-        }
-        gradlePluginPortal()
-        maven {
-            name = 'Fabric'
-            url = 'https://maven.fabricmc.net/'
-        }
-    }
+	repositories {
+		jcenter()
+		maven {
+			name = "concern"
+			url = "https://maven.concern.i.ng/"
+		}
+		gradlePluginPortal()
+		maven {
+			name = 'Fabric'
+			url = 'https://maven.fabricmc.net/'
+		}
+	}
 }
 
-include(":textile-api-gui")
+include 'textile-api-base'
+include("textile-api-gui")
+include 'textile-lifecycle-events-v1'
+include("textile-recipe-api-v1")
