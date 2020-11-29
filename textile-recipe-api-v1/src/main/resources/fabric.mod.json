@@ -17,9 +17,10 @@
   "icon": "assets/textile-recipe-api-v1/icon.png",
 
   "environment": "*",
-  "entrypoints": {
-    "main": []
-  },
+
+  "mixins": [
+    "textile-recipe-api.mixins.json"
+  ],
 
   "depends": {
     "fabricloader": "*",
