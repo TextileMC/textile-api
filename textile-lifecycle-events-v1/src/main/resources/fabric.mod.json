@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "id": "textile-recipe-api-v1",
+  "id": "textile-lifecycle-events-v1",
   "version": "${version}",
 
-  "name": "Textile Recipe API (v1)",
-  "description": "Hooks for infdev recipes",
+  "name": "Textile Lifecycle Events (v1)",
+  "description": "Hooks for infdev lifecycle",
   "authors": [
     "TextileMC"
   ],
@@ -14,12 +14,12 @@
   },
 
   "license": "CC0-1.0",
-  "icon": "assets/textile-recipe-api-v1/icon.png",
+  "icon": "assets/textile-lifecycle-events-v1/icon.png",
 
   "environment": "*",
 
   "mixins": [
-    "textile-recipe-api-v1.mixins.json"
+    "textile-lifecycle-events-v1.mixins.json"
   ],
 
   "depends": {
