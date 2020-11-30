@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "textile-utils-api-v1",
+  "version": "${version}",
+  "name": "Textile Utils API (v1)",
+  "description": "Infdev Utils",
+  "authors": [
+    "TextileMC"
+  ],
+  "contact": {
+    "issues": "https://github.com/TextileMC/textile-api/issues",
+    "sources": "https://github.com/TextileMC/textile-api"
+  },
+  "license": "CC0-1.0",
+  "icon": "assets/textile-utils-api-v1/icon.png",
+  "environment": "*",
+  "accessWidener": "textile-utils-api-v1.accessWidener",
+  "mixins": [
+    "textile-utils-api-v1.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": "*",
+    "minecraft": "20100618"
+  }
+}

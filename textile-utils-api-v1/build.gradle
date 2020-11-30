@@ -1,0 +1,10 @@
+archivesBaseName = 'textile-utils-api-v1'
+version = '1.0.0'
+
+dependencies {
+	implementation project(':textile-api-base')
+}
+
+minecraft {
+	accessWidener "src/main/resources/textile-utils-api-v1.accessWidener"
+}
