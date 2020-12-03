@@ -13,7 +13,8 @@ pluginManagement {
 	}
 }
 
-include 'textile-api-base'
-include("textile-api-gui")
-include 'textile-lifecycle-events-v1'
-include("textile-recipe-api-v1")
+include('textile-api-base')
+include('textile-api-gui')
+include('textile-lifecycle-events-v1')
+include('textile-recipe-api-v1')
+include('textile-utils-api-v1')

@@ -1,0 +1,6 @@
+accessWidener   v1  named
+## Blocks
+accessible  method  net/minecraft/block/Block   <init>  (ILnet/minecraft/block/Material;)V
+mutable field net/minecraft/block/Block id I
+mutable field net/minecraft/item/Item id I
+mutable field net/minecraft/block/Block BLOCKS [Lnet/minecraft/block/Block;
