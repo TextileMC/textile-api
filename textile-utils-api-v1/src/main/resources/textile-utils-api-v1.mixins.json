@@ -1,8 +1,9 @@
 {
   "required": true,
-  "package": "net.textilemc.textile.mixin.recipe",
+  "package": "net.textilemc.textile.utils.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "BlockCacherMixin"
   ],
   "injectors": {
     "defaultRequire": 1

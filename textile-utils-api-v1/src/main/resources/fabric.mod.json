@@ -11,6 +11,9 @@
     "issues": "https://github.com/TextileMC/textile-api/issues",
     "sources": "https://github.com/TextileMC/textile-api"
   },
+  "entrypoints": {
+    "main": ["net.textilemc.textile.utils.RegistrationManagerEntrypoint"]
+  },
   "license": "CC0-1.0",
   "icon": "assets/textile-utils-api-v1/icon.png",
   "environment": "*",
