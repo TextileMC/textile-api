@@ -17,15 +17,21 @@
 
 package net.textilemc.textile.mixin.recipe;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import net.textilemc.textile.api.recipe.v1.Dispatcher;
 import net.textilemc.textile.api.recipe.v1.event.ShapedRecipeCallback;
+import net.textilemc.textile.impl.recipe.DispatcherHolder;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.RecipeDispatcher;
@@ -40,5 +46,16 @@ abstract class RecipeDispatcherMixin {
 		ShapedRecipeCallback.EVENT.invoker().accept(this::addShapedRecipe);
 		//noinspection Java8ListSort
 		Collections.sort(list, c);
+	}
+
+	@Inject(method = "method_304", at = @At("RETURN"), cancellable = true)
+	public void beforeReturn(int[] is, CallbackInfoReturnable<ItemStack> cir) {
+		for (Dispatcher<?> dispatcher : DispatcherHolder.DISPATCHERS) {
+			ItemStack out = dispatcher.getOutput(Arrays.stream(is).mapToObj(ItemStack::new).collect(Collectors.toList()));
+			if (out != null) {
+				cir.setReturnValue(out);
+				break;
+			}
+		}
 	}
 }
