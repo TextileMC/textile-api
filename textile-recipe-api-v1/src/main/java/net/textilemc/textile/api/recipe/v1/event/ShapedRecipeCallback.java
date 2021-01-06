@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package net.textilemc.textile.api.recipe.event.v1;
+package net.textilemc.textile.api.recipe.v1.event;
 
 import net.textilemc.textile.api.event.Event;
 import net.textilemc.textile.api.event.EventFactory;
@@ -41,6 +41,6 @@ public interface ShapedRecipeCallback {
 
 	@FunctionalInterface
 	interface ShapedRecipeConsumer {
-		void addShapedRecipe(ItemStack var1, Object... args);
+		void addShapedRecipe(ItemStack output, Object... args);
 	}
 }
