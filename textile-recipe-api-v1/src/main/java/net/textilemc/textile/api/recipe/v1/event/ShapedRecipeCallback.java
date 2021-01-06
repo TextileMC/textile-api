@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package net.textilemc.textile.api.recipe.event.v1;
+package net.textilemc.textile.api.recipe.v1.event;
 
 import net.textilemc.textile.api.event.Event;
 import net.textilemc.textile.api.event.EventFactory;

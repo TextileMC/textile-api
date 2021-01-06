@@ -1,6 +1,6 @@
-package net.textilemc.textile.api.recipe.event.v1.test;
+package net.textilemc.textile.api.recipe.v1.test;
 
-import net.textilemc.textile.api.recipe.event.v1.ShapelessRecipe;
+import net.textilemc.textile.api.recipe.v1.ShapelessRecipe;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;

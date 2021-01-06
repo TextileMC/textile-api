@@ -12,7 +12,7 @@
   },
   "entrypoints": {
     "main": [
-      "net.textilemc.textile.api.recipe.event.v1.test.RecipeTest"
+      "net.textilemc.textile.api.recipe.v1.test.RecipeTest"
     ]
   }
 }

@@ -1,9 +1,7 @@
-package net.textilemc.textile.api.recipe.event.v1;
+package net.textilemc.textile.api.recipe.v1;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 import com.google.common.base.Preconditions;
 
@@ -24,7 +22,7 @@ public class ShapelessRecipe implements CraftingRecipeType {
 	 * @param ingredients The ingredients
 	 * @throws IllegalArgumentException If the size of ingredients is 0
 	 */
-	private ShapelessRecipe(ItemStack output, ArrayList<ItemStack> ingredients) {
+	public ShapelessRecipe(ItemStack output, ArrayList<ItemStack> ingredients) {
 		Preconditions.checkArgument(ingredients.size() > 0);
 		this.output = output;
 		this.ingredients = ingredients;
@@ -52,37 +50,30 @@ public class ShapelessRecipe implements CraftingRecipeType {
 	}
 
 	public static Builder builder(ItemStack output) {
-		return new Builder(output);
+		return new ShapelessRecipeBuilder(output);
 	}
 
 	/**
 	 * Helper class for creating shapeless recipes
 	 */
-	public static class Builder {
-		private final ItemStack output;
-		private final ArrayList<ItemStack> stacks = new ArrayList<>();
+	public interface Builder {
+		/**
+		 * @param stack The item stack to be added to the shapeless recipe
+		 * @return This builder
+		 */
+		Builder add(ItemStack stack);
 
-		private Builder(ItemStack output) {
-			this.output = output;
-		}
-
-		public Builder add(ItemStack stack) {
-			this.stacks.add(Objects.requireNonNull(stack));
-			return this;
-		}
-
-		public Builder add(Item item) {
-			return this.add(new ItemStack(Objects.requireNonNull(item)));
-		}
+		/**
+		 * @param item The item to be added to the shapeless recipe
+		 * @return This builder
+		 */
+		Builder add(Item item);
 
 		/**
 		 * Converts this builder to a recipe
+		 *
 		 * @return a shapeless recipe
 		 */
-		@SuppressWarnings("unchecked")
-		public ShapelessRecipe build() {
-			Preconditions.checkArgument(this.stacks.size() > 0, "Empty Shapeless Recipe");
-			return new ShapelessRecipe(this.output, (ArrayList<ItemStack>) this.stacks.clone());
-		}
+		ShapelessRecipe build();
 	}
 }

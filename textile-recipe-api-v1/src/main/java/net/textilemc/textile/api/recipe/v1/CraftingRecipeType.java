@@ -1,4 +1,4 @@
-package net.textilemc.textile.api.recipe.event.v1;
+package net.textilemc.textile.api.recipe.v1;
 
 import java.util.Arrays;
 import java.util.List;
