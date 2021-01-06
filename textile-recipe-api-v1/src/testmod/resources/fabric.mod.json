@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "id": "textile-recipe-api-v1-test",
+  "version": "0.1.0",
+  "name": "Textile Recipe API (v1) Testmod",
+  "authors": [
+    "TextileMC"
+  ],
+  "contact": {
+    "issues": "https://github.com/TextileMC/textile-api/issues",
+    "sources": "https://github.com/TextileMC/textile-api"
+  },
+  "entrypoints": {
+    "main": [
+      "net.textilemc.textile.api.recipe.event.v1.test.RecipeTest"
+    ]
+  }
+}
