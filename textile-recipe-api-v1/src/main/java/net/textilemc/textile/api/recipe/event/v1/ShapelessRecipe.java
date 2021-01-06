@@ -3,9 +3,11 @@ package net.textilemc.textile.api.recipe.event.v1;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 import com.google.common.base.Preconditions;
 
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
@@ -47,5 +49,40 @@ public class ShapelessRecipe implements CraftingRecipeType {
 		}
 
 		return stacks.isEmpty();
+	}
+
+	public static Builder builder(ItemStack output) {
+		return new Builder(output);
+	}
+
+	/**
+	 * Helper class for creating shapeless recipes
+	 */
+	public static class Builder {
+		private final ItemStack output;
+		private final ArrayList<ItemStack> stacks = new ArrayList<>();
+
+		private Builder(ItemStack output) {
+			this.output = output;
+		}
+
+		public Builder add(ItemStack stack) {
+			this.stacks.add(Objects.requireNonNull(stack));
+			return this;
+		}
+
+		public Builder add(Item item) {
+			return this.add(new ItemStack(Objects.requireNonNull(item)));
+		}
+
+		/**
+		 * Converts this builder to a recipe
+		 * @return a shapeless recipe
+		 */
+		@SuppressWarnings("unchecked")
+		public ShapelessRecipe build() {
+			Preconditions.checkArgument(this.stacks.size() > 0, "Empty Shapeless Recipe");
+			return new ShapelessRecipe(this.output, (ArrayList<ItemStack>) this.stacks.clone());
+		}
 	}
 }
