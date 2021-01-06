@@ -53,6 +53,10 @@ public class ShapelessRecipe implements CraftingRecipeType {
 		return new ShapelessRecipeBuilder(output);
 	}
 
+	static {
+		Dispatcher.register(DISPATCHER);
+	}
+
 	/**
 	 * Helper class for creating shapeless recipes
 	 */
