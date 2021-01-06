@@ -9,10 +9,5 @@
   "contact": {
     "issues": "https://github.com/TextileMC/textile-api/issues",
     "sources": "https://github.com/TextileMC/textile-api"
-  },
-  "entrypoints": {
-    "preLaunch": [
-      "net.textilemc.textile.api.recipe.v1.test.RecipeTest"
-    ]
   }
 }

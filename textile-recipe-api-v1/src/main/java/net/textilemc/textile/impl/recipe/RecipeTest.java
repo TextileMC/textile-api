@@ -1,4 +1,4 @@
-package net.textilemc.textile.api.recipe.v1.test;
+package net.textilemc.textile.impl.recipe;
 
 import net.textilemc.textile.api.recipe.v1.ShapelessRecipe;
 
