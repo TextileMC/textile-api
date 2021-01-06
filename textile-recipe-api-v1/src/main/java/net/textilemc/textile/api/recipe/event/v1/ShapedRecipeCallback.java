@@ -41,6 +41,6 @@ public interface ShapedRecipeCallback {
 
 	@FunctionalInterface
 	interface ShapedRecipeConsumer {
-		void addShapedRecipe(ItemStack var1, Object... args);
+		void addShapedRecipe(ItemStack output, Object... args);
 	}
 }

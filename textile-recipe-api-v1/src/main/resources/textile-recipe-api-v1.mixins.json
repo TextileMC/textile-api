@@ -3,6 +3,9 @@
   "package": "net.textilemc.textile.mixin.recipe",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "CraftingInventoryAccessor",
+    "CraftingInventoryMixin",
+    "MinecraftAppletAccessor",
     "RecipeDispatcherMixin"
   ],
   "injectors": {

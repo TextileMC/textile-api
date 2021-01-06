@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "package": "net.textilemc.textile.mixin.base",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "MinecraftAppletMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

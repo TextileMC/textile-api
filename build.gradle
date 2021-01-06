@@ -5,6 +5,9 @@ plugins {
 
 project.version = "0.0.1-SNAPSHOT"
 
+import net.fabricmc.loom.task.RunClientTask
+import net.fabricmc.loom.task.RunServerTask
+
 allprojects {
     project.group = "textile-api"
 
@@ -30,6 +33,21 @@ allprojects {
             url "https://maven.concern.i.ng/"
         }
     }
+
+	sourceSets {
+		testmod {
+			compileClasspath += main.compileClasspath
+			runtimeClasspath += main.runtimeClasspath
+		}
+	}
+
+	task runTestmodClient(type: RunClientTask) {
+		classpath sourceSets.testmod.runtimeClasspath
+	}
+
+	task runTestmodServer(type: RunServerTask) {
+		classpath sourceSets.testmod.runtimeClasspath
+	}
 
     dependencies {
         minecraft "com.mojang:minecraft:${project.minecraft_version}"
@@ -104,6 +122,16 @@ allprojects {
     }
 }
 
+subprojects {
+	dependencies {
+		testmodCompile sourceSets.main.output
+	}
+}
+
+sourceSets {
+	testmod
+}
+
 javadoc {
     options {
         source = "8"
@@ -114,7 +142,7 @@ javadoc {
                 'https://guava.dev/releases/21.0/api/docs/',
                 'https://asm.ow2.io/javadoc/',
                 'https://docs.oracle.com/javase/8/docs/api/',
-                'http://jenkins.liteloader.com/job/Mixin/javadoc/',
+                'https://jenkins.liteloader.com/job/Mixin/javadoc/',
                 'https://logging.apache.org/log4j/2.x/log4j-api/apidocs/'
                 // Need to add minecraft jd publication etc once there is one available
         )
