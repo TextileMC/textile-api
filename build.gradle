@@ -6,7 +6,6 @@ plugins {
 project.version = "0.0.1-SNAPSHOT"
 
 import net.fabricmc.loom.task.RunClientTask
-import net.fabricmc.loom.task.RunServerTask
 
 allprojects {
     project.group = "textile-api"
@@ -42,10 +41,6 @@ allprojects {
 	}
 
 	task runTestmodClient(type: RunClientTask) {
-		classpath sourceSets.testmod.runtimeClasspath
-	}
-
-	task runTestmodServer(type: RunServerTask) {
 		classpath sourceSets.testmod.runtimeClasspath
 	}
 
