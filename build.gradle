@@ -54,7 +54,14 @@ allprojects {
 
         mappings "net.textilemc:yarrn:inf-20100618+build20d332:v2"
 
-        modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+//        modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+
+		// IMPORTANT
+		// Until a certain pr is merged, make sure you
+		// add -Dfabric.gameVersion=20100618 to your run
+		// config's vm arguments otherwise bad
+
+        modImplementation "com.github.sfPlayer1:fabric-loader:adad4b3"
 
         // Some dependencies aren't gotten by the loader, so we add them ourselves
         implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.8.1'
