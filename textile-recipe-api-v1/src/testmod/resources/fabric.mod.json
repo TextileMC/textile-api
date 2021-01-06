@@ -11,7 +11,7 @@
     "sources": "https://github.com/TextileMC/textile-api"
   },
   "entrypoints": {
-    "main": [
+    "preLaunch": [
       "net.textilemc.textile.api.recipe.v1.test.RecipeTest"
     ]
   }

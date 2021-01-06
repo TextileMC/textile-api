@@ -6,11 +6,11 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-import net.fabricmc.api.ModInitializer;
+import net.fabricmc.loader.api.entrypoint.PreLaunchEntrypoint;
 
-public class RecipeTest implements ModInitializer {
+public class RecipeTest implements PreLaunchEntrypoint {
 	@Override
-	public void onInitialize() {
+	public void onPreLaunch() {
 		System.out.println("Shapeless Recipes");
 		ShapelessRecipe.DISPATCHER.accept(ShapelessRecipe.builder(new ItemStack(Item.COAL))
 				.add(new ItemStack(Block.LOG))
